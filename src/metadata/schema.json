@@ -1,0 +1,550 @@
+{
+    "package": "Reminders",
+    "tagline": "Reminders API",
+    "description": "Schedule and manage reminders. Notify your customers about their appointments through SMS, emails or webhooks.",
+    "image": "https:\/\/logo.clearbit.com\/reminders.company",
+    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-Reminders-Package",
+    "keywords": [
+        "API",
+        "notification",
+        "SMS",
+        "email"
+    ],
+    "accounts": {
+        "domain": "reminders.company",
+        "credentials": [
+            "apiKey"
+        ]
+    },
+    "steps": [
+        "Browse to https:\/\/www.reminders.company",
+        "Register or log in",
+        "Browse to https:\/\/www.reminders.company\/account to get your apiKey"
+    ],
+    "blocks": [
+        {
+            "name": "listReminders",
+            "description": "Retrieves all of your reminders.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API key",
+                    "required": true
+                },
+                {
+                    "name": "active",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If set to true it will return all active reminders, false all inactive reminders. Not set means all reminders.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Sets the offset for the returned results",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Limits the amount of results returned.",
+                    "required": false
+                },
+                {
+                    "name": "sort",
+                    "type": "String",
+                    "info": "Specifies the sort method for the retrieved collection.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.reminders.company\/v1\/reminders",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "active",
+                            "offset",
+                            "limit",
+                            "sort"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "token": "{$data['apiKey']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleReminder",
+            "description": "This endpoint retrieves a specific reminder.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API key",
+                    "required": true
+                },
+                {
+                    "name": "reminderId",
+                    "type": "String",
+                    "info": "This endpoint retrieves a specific reminder.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.reminders.company\/v1\/reminders\/{$data['reminderId']}",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "token": "{$data['apiKey']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createEmailReminder",
+            "description": "This endpoint allows you to create a new email Reminder. Timezone format follows the naming convention of moment.timezone.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API key",
+                    "required": true
+                },
+                {
+                    "name": "due",
+                    "type": "DatePicker",
+                    "info": "The date the reminder is due for.",
+                    "required": true
+                },
+                {
+                    "name": "timezone",
+                    "type": "String",
+                    "info": "Overrides accounts default timezone for this specific reminder.",
+                    "required": false
+                },
+                {
+                    "name": "force",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Skips validation of due date to check if it happened in the past.",
+                    "required": false
+                },
+                {
+                    "name": "emailTo",
+                    "type": "String",
+                    "info": "To who you're sending the email",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "email_to"
+                    }
+                },
+                {
+                    "name": "emailSubject",
+                    "type": "String",
+                    "info": "Email subject",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "email_subject"
+                    }
+                },
+                {
+                    "name": "emailBody",
+                    "type": "String",
+                    "info": "Email body",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "email_body"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.reminders.company\/v1\/reminders",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "due",
+                            "timezone",
+                            "force",
+                            "email_to",
+                            "email_subject",
+                            "email_body"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "token": "{$data['apiKey']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createSmsReminder",
+            "description": "This endpoint allows you to create a new sms Reminder. Timezone format follows the naming convention of moment.timezone.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API key",
+                    "required": true
+                },
+                {
+                    "name": "due",
+                    "type": "DatePicker",
+                    "info": "The date the reminder is due for.",
+                    "required": true
+                },
+                {
+                    "name": "timezone",
+                    "type": "String",
+                    "info": "Overrides accounts default timezone for this specific reminder.",
+                    "required": false
+                },
+                {
+                    "name": "force",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Skips validation of due date to check if it happened in the past.",
+                    "required": false
+                },
+                {
+                    "name": "smsTo",
+                    "type": "String",
+                    "info": "To who you're sending the sms, include + and area code",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "sms_to"
+                    }
+                },
+                {
+                    "name": "smsBody",
+                    "type": "String",
+                    "info": "Sms body",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "sms_body"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.reminders.company\/v1\/reminders",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "due",
+                            "timezone",
+                            "force",
+                            "sms_to",
+                            "sms_body"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "token": "{$data['apiKey']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createWebhookReminder",
+            "description": "This endpoint allows you to create a new webhook Reminder. Timezone format follows the naming convention of moment.timezone.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API key",
+                    "required": true
+                },
+                {
+                    "name": "due",
+                    "type": "DatePicker",
+                    "info": "The date the reminder is due for.",
+                    "required": true
+                },
+                {
+                    "name": "timezone",
+                    "type": "String",
+                    "info": "Overrides accounts default timezone for this specific reminder.",
+                    "required": false
+                },
+                {
+                    "name": "force",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Skips validation of due date to check if it happened in the past.",
+                    "required": false
+                },
+                {
+                    "name": "webhook",
+                    "type": "String",
+                    "info": "A url that we will make a post call with the reminders body when due",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.reminders.company\/v1\/reminders",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "due",
+                            "timezone",
+                            "force",
+                            "webhook"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "token": "{$data['apiKey']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateReminder",
+            "description": "This endpoint updates a specific reminder.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API key",
+                    "required": true
+                },
+                {
+                    "name": "reminderId",
+                    "type": "String",
+                    "info": "This endpoint retrieves a specific reminder.",
+                    "required": true
+                },
+                {
+                    "name": "emailTo",
+                    "type": "String",
+                    "info": "To who you're sending the email",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "email_to"
+                    }
+                },
+                {
+                    "name": "emailSubject",
+                    "type": "String",
+                    "info": "Email subject",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "email_subject"
+                    }
+                },
+                {
+                    "name": "emailBody",
+                    "type": "String",
+                    "info": "Email body",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "email_body"
+                    }
+                },
+                {
+                    "name": "smsTo",
+                    "type": "String",
+                    "info": "To who you're sending the sms, include + and area code",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "sms_to"
+                    }
+                },
+                {
+                    "name": "smsBody",
+                    "type": "String",
+                    "info": "Sms body",
+                    "required": false,
+                    "vendorSchema": {
+                        "name": "sms_body"
+                    }
+                },
+                {
+                    "name": "webhook",
+                    "type": "String",
+                    "info": "A url that we will make a post call with the reminders body when due",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.reminders.company\/v1\/reminders\/{$data['reminderId']}",
+                "method": "put",
+                "requestParameters": [
+                    {
+                        "type": "json",
+                        "parameters": [
+                            "email_to",
+                            "email_subject",
+                            "email_body",
+                            "sms_to",
+                            "sms_body",
+                            "webhook"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "token": "{$data['apiKey']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteReminder",
+            "description": "This endpoint deletes a specific reminder.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API key",
+                    "required": true
+                },
+                {
+                    "name": "reminderId",
+                    "type": "String",
+                    "info": "This endpoint retrieves a specific reminder.",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.reminders.company\/v1\/reminders\/{$data['reminderId']}",
+                "method": "delete",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "token": "{$data['apiKey']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAccountUsage",
+            "description": "This endpoint retrieves your current plan and usage of your account for the current period of time. A period of time starts on the first of each month and finishes the next first of the month.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API key",
+                    "required": true
+                }
+            ],
+            "vendorRequest": {
+                "url": "https:\/\/api.reminders.company\/v1\/usage",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": []
+                    }
+                ],
+                "headers": {
+                    "token": "{$data['apiKey']}"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
