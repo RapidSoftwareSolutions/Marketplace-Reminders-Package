@@ -2,7 +2,7 @@
     "package": "Reminders",
     "tagline": "Reminders API",
     "description": "Schedule and manage reminders. Notify your customers about their appointments through SMS, emails or webhooks.",
-    "image": "https:\/\/logo.clearbit.com\/reminders.company",
+    "image": "https://www.reminders.company/docs/images/logo.png",
     "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-Reminders-Package",
     "keywords": [
         "API",
