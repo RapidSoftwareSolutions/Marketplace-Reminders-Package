@@ -68,6 +68,7 @@ This endpoint allows you to create a new email Reminder. Timezone format follows
 | timezone    | String     | Overrides accounts default timezone for this specific reminder.
 | force       | Select     | Skips validation of due date to check if it happened in the past.
 | emailTo     | String     | To who you're sending the email
+| emailFrom     | String     | Who is sending it
 | emailSubject| String     | Email subject
 | emailBody   | String     | Email body
 

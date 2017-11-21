@@ -171,6 +171,14 @@
                     "vendorSchema": {
                         "name": "email_to"
                     }
+                },{
+                    "name": "emailFrom",
+                    "type": "String",
+                    "info": "Who is sending it",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "email_from"
+                    }
                 },
                 {
                     "name": "emailSubject",
@@ -203,7 +211,8 @@
                             "force",
                             "email_to",
                             "email_subject",
-                            "email_body"
+                            "email_body",
+                            "email_from"
                         ]
                     }
                 ],

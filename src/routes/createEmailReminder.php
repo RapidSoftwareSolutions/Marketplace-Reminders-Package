@@ -12,10 +12,10 @@ $app->post('/api/Reminders/createEmailReminder', function ($request, $response) 
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiKey'=>'apiKey','due'=>'due','emailTo'=>'email_to','emailSubject'=>'email_subject','emailBody'=>'email_body'];
+    $requiredParams = ['apiKey'=>'apiKey','due'=>'due','emailTo'=>'email_to','emailSubject'=>'email_subject','emailBody'=>'email_body', 'emailFrom' => 'email_from'];
     $optionalParams = ['timezone'=>'timezone','force'=>'force'];
     $bodyParams = [
-       'json' => ['due','timezone','force','email_to','email_subject','email_body']
+       'json' => ['due','timezone','force','email_to','email_subject','email_body', 'email_from']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
