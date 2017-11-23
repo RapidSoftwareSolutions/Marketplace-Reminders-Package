@@ -31,34 +31,6 @@
                     "type": "credentials",
                     "info": "Your API key",
                     "required": true
-                },
-                {
-                    "name": "active",
-                    "type": "Select",
-                    "options": [
-                        "true",
-                        "false"
-                    ],
-                    "info": "If set to true it will return all active reminders, false all inactive reminders. Not set means all reminders.",
-                    "required": false
-                },
-                {
-                    "name": "offset",
-                    "type": "Number",
-                    "info": "Sets the offset for the returned results",
-                    "required": false
-                },
-                {
-                    "name": "limit",
-                    "type": "Number",
-                    "info": "Limits the amount of results returned.",
-                    "required": false
-                },
-                {
-                    "name": "sort",
-                    "type": "String",
-                    "info": "Specifies the sort method for the retrieved collection.",
-                    "required": false
                 }
             ],
             "vendorRequest": {
@@ -68,10 +40,6 @@
                     {
                         "type": "query",
                         "parameters": [
-                            "active",
-                            "offset",
-                            "limit",
-                            "sort"
                         ]
                     }
                 ],
@@ -103,7 +71,7 @@
                 {
                     "name": "reminderId",
                     "type": "String",
-                    "info": "This endpoint retrieves a specific reminder.",
+                    "info": "The ID of the Reminder to retrieve",
                     "required": true
                 }
             ],

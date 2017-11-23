@@ -13,9 +13,9 @@ $app->post('/api/Reminders/listReminders', function ($request, $response) {
     }
 
     $requiredParams = ['apiKey'=>'apiKey'];
-    $optionalParams = ['active'=>'active','offset'=>'offset','limit'=>'limit','sort'=>'sort'];
+    $optionalParams = [];
     $bodyParams = [
-       'query' => ['active','offset','limit','sort']
+       'query' => []
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);

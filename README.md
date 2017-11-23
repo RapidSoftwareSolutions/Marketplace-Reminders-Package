@@ -45,10 +45,6 @@ Retrieves all of your reminders.
 | Field | Type       | Description
 |-------|------------|----------
 | apiKey| credentials| Your API key
-| active| Select     | If set to true it will return all active reminders, false all inactive reminders. Not set means all reminders.
-| offset| Number     | Sets the offset for the returned results
-| limit | Number     | Limits the amount of results returned.
-| sort  | String     | Specifies the sort method for the retrieved collection.
 
 ## Reminders.getSingleReminder
 This endpoint retrieves a specific reminder.
@@ -56,7 +52,7 @@ This endpoint retrieves a specific reminder.
 | Field     | Type       | Description
 |-----------|------------|----------
 | apiKey    | credentials| Your API key
-| reminderId| String     | This endpoint retrieves a specific reminder.
+| reminderId| String     | The ID of the Reminder to retrieve
 
 ## Reminders.createEmailReminder
 This endpoint allows you to create a new email Reminder. Timezone format follows the naming convention of moment.timezone.
@@ -65,7 +61,7 @@ This endpoint allows you to create a new email Reminder. Timezone format follows
 |-------------|------------|----------
 | apiKey      | credentials| Your API key
 | due         | DatePicker | The date the reminder is due for.
-| timezone    | String     | Overrides accounts default timezone for this specific reminder.
+| timezone    | String     | Overrides accounts default timezone for this specific reminder. Timezone format follows the naming convention of [moment.timezone](https://momentjs.com/timezone/).
 | force       | Select     | Skips validation of due date to check if it happened in the past.
 | emailTo     | String     | To who you're sending the email
 | emailFrom     | String     | Who is sending it
@@ -85,7 +81,7 @@ This endpoint allows you to create a new sms Reminder. Timezone format follows t
 | smsBody | String     | Sms body
 
 ## Reminders.createWebhookReminder
-This endpoint allows you to create a new webhook Reminder. Timezone format follows the naming convention of moment.timezone.
+This endpoint allows you to create a new webhook Reminder. Timezone format follows the naming convention of [moment.timezone](https://momentjs.com/timezone/)
 You can use our service as webhook: 
    ```
    https://webhooks.rapidapi.io/api/message/Reminders/webhookEvent/{projectName}/{projectKey} * see credentials description above
@@ -95,7 +91,7 @@ You can use our service as webhook:
 |---------|------------|----------
 | apiKey  | credentials| Your API key
 | due     | DatePicker | The date the reminder is due for.
-| timezone| String     | Overrides accounts default timezone for this specific reminder.
+| timezone| String     | Overrides accounts default timezone for this specific reminder. Timezone format follows the naming convention of [moment.timezone](https://momentjs.com/timezone/)
 | force   | Select     | Skips validation of due date to check if it happened in the past.
 | webhook | String     | A url that we will make a post call with the reminders body when due
 
