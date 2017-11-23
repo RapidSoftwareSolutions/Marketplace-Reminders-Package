@@ -75,13 +75,13 @@ This endpoint allows you to create a new sms Reminder. Timezone format follows t
 |---------|------------|----------
 | apiKey  | credentials| Your API key
 | due     | DatePicker | The date the reminder is due for.
-| timezone| String     | Overrides accounts default timezone for this specific reminder.
+| timezone| String     | Overrides accounts default timezone for this specific reminder. Timezone format follows the naming convention of [moment.timezone](https://momentjs.com/timezone/)
 | force   | Select     | Skips validation of due date to check if it happened in the past.
 | smsTo   | String     | To who you're sending the sms, include + and area code
 | smsBody | String     | Sms body
 
 ## Reminders.createWebhookReminder
-This endpoint allows you to create a new webhook Reminder. Timezone format follows the naming convention of [moment.timezone](https://momentjs.com/timezone/)
+This endpoint allows you to create a new webhook Reminder. 
 You can use our service as webhook: 
    ```
    https://webhooks.rapidapi.io/api/message/Reminders/webhookEvent/{projectName}/{projectKey} * see credentials description above
@@ -105,7 +105,7 @@ You can use our service as webhook:
 | Field       | Type       | Description
 |-------------|------------|----------
 | apiKey      | credentials| Your API key
-| reminderId  | String     | This endpoint retrieves a specific reminder.
+| reminderId  | String     | The ID of the Reminder
 | emailTo     | String     | To who you're sending the email
 | emailSubject| String     | Email subject
 | emailBody   | String     | Email body
@@ -119,7 +119,7 @@ This endpoint deletes a specific reminder.
 | Field     | Type       | Description
 |-----------|------------|----------
 | apiKey    | credentials| Your API key
-| reminderId| String     | This endpoint retrieves a specific reminder.
+| reminderId| String     | The ID of the Reminder
 
 ## Reminders.getAccountUsage
 This endpoint retrieves your current plan and usage of your account for the current period of time. A period of time starts on the first of each month and finishes the next first of the month.
